@@ -1,7 +1,7 @@
-# TBP-CI
+# TLBP-CI
 
 ## Introduction
-This repository contains codes for TBP-CI algorithm.
+This repository contains codes for TLBP-CI algorithm.
 
 ## Usage
 - See **requirement.txt** for software configuration.
