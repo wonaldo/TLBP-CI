@@ -84,23 +84,13 @@ edges4 = [
 
 
 def edges_to_children_dict(edges):
-    """
-    将边列表转换为 {节点: [子节点列表]} 的字典。
-    输入的每条边格式为 (parent, child)。
-
-    返回值：
-        dict: {node: [children]}
-    """
-    # 收集所有出现过的节点
     nodes = set()
     for p, c in edges:
         nodes.add(p)
         nodes.add(c)
 
-    # 初始化每个节点
     children_dict = {node: [] for node in nodes}
 
-    # 填充子节点
     for parent, child in edges:
         children_dict[parent].append(child)
 
@@ -137,9 +127,3 @@ if __name__ == '__main__':
     print("shd-distance:",shd_list)
     print("fdr:",fdr_list)
     print("f1-score:",f1_list)
-
-    ## value=0.05
-    ### tau=2
-# shd-distance: [9.0, 10.0, 15.0, 12.0]
-# fdr: [0.15384615384615385, 0.14285714285714285, 0.058823529411764705, 0.23076923076923078]
-# f1-score: [0.6666666666666667, 0.7272727272727273, 0.8205128205128205, 0.588235294117647]
