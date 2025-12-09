@@ -62,24 +62,22 @@ def al4causal(nodes, data, bandwidth, adjacency,lag):
 
             ## Calculate the correlation first
             sep_set_for_indtest = np.hstack(sep_set_i) if sep_set_i else np.empty((data.shape[0], 0))
-            ## print(sep_set_for_indtest.shape)
-            ## 不同lag下的作用
-            # if lag==1:
-            #     if sep_set_for_indtest.any():
-            #         p_value = HSICtest.CIndtest(data[2:, [node_to_col_idx[i]]].reshape(-1, 1), data[2:, [node_to_col_idx[j]]].reshape(-1, 1), sep_set_for_indtest[1:-1, :])[0]
-            #     else:
-            #         p_value = HSICtest.UIndtest(data[2:, [node_to_col_idx[i]]].reshape(-1, 1), data[2:, [node_to_col_idx[j]]].reshape(-1, 1))[0]
-            # elif lag>1:
-            #     cond_cols=[]
-            #     if sep_set_for_indtest.any():
-            #         for t_lag in range(0,lag):
-            #             cond_col=sep_set_for_indtest[1+t_lag:-lag+t_lag, :]
-            #             cond_cols.append(cond_col)    
-            #         sep_set_all_for_indtest=np.hstack(cond_cols)
-            #         # print(sep_set_all_for_indtest.shape)
-            #         p_value = HSICtest.CIndtest(data[1+lag:, [node_to_col_idx[i]]].reshape(-1, 1), data[1+lag:, [node_to_col_idx[j]]].reshape(-1, 1), sep_set_all_for_indtest)[0]
-            #     else:
-            #         p_value = HSICtest.UIndtest(data[1+lag:, [node_to_col_idx[i]]].reshape(-1, 1), data[1+lag:, [node_to_col_idx[j]]].reshape(-1, 1))[0]
+            if lag==1:
+                if sep_set_for_indtest.any():
+                    p_value = HSICtest.CIndtest(data[2:, [node_to_col_idx[i]]].reshape(-1, 1), data[2:, [node_to_col_idx[j]]].reshape(-1, 1), sep_set_for_indtest[1:-1, :])[0]
+                else:
+                    p_value = HSICtest.UIndtest(data[2:, [node_to_col_idx[i]]].reshape(-1, 1), data[2:, [node_to_col_idx[j]]].reshape(-1, 1))[0]
+            elif lag>1:
+                cond_cols=[]
+                if sep_set_for_indtest.any():
+                    for t_lag in range(0,lag):
+                        cond_col=sep_set_for_indtest[1+t_lag:-lag+t_lag, :]
+                        cond_cols.append(cond_col)    
+                    sep_set_all_for_indtest=np.hstack(cond_cols)
+                    # print(sep_set_all_for_indtest.shape)
+                    p_value = HSICtest.CIndtest(data[1+lag:, [node_to_col_idx[i]]].reshape(-1, 1), data[1+lag:, [node_to_col_idx[j]]].reshape(-1, 1), sep_set_all_for_indtest)[0]
+                else:
+                    p_value = HSICtest.UIndtest(data[1+lag:, [node_to_col_idx[i]]].reshape(-1, 1), data[1+lag:, [node_to_col_idx[j]]].reshape(-1, 1))[0]
 
             if sep_set_for_indtest.any():
                     p_value = HSICtest.CIndtest(data[1+lag:, [node_to_col_idx[i]]].reshape(-1, 1), data[1+lag:, [node_to_col_idx[j]]].reshape(-1, 1), sep_set_for_indtest[1:-lag, :])[0]
