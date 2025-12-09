@@ -1,7 +1,7 @@
 import itertools as itr
 import kde
 import importlib
-import HSICtest
+import KCItest
 importlib.reload(kde)
 import numpy as np
 
