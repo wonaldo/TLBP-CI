@@ -105,7 +105,7 @@ def al4causal(nodes, data, bandwidth, adjacency,lag):
                 delta_te = TEij - TEji
 
                 # Significance test
-                low_band, high_band = block_bootstrap(data[1:-lag, [node_to_col_idx[i]]], data[1+lag:, [node_to_col_idx[j]]], sep_set_ij, sep_set_ji, bandwidth, block_size=10, n_bootstrap=100, low_per=2.5, high_per=97.5)
+                low_band, high_band = block_bootstrap(data[1:-lag, [node_to_col_idx[i]]], data[1+lag:, [node_to_col_idx[j]]], sep_set_ij, sep_set_ji, bandwidth, block_size=10, n_bootstrap=5000, low_per=2.5, high_per=97.5)
                 if delta_te < low_band or delta_te > high_band:
                     if (delta_te > 0):
                         new_ad[i].append(j)
