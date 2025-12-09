@@ -87,9 +87,6 @@ def al4causal(nodes, data, bandwidth, adjacency,lag):
             ## Linear simple causality
             threshold = 0.05
 
-            ## Nonlinear complex causality
-            # threshold = 1e-3
-
             if p_value<threshold:
                 sep_set_i = [node for node in adjacency[i] if node != i]
                 sep_set_j = [node for node in adjacency[j] if node != j]
